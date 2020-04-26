@@ -1,0 +1,59 @@
+#!/bin/bash
+
+
+tag() {
+printf "\e[1;92m
+▄▄      ▄▄ ▄▄▄   ▄▄     ██
+██      ██ ███   ██     ▀▀
+▀█▄ ██ ▄█▀ ██▀█  ██   ████     ████▄██▄   ▄████▄
+ ██ ██ ██  ██ ██ ██     ██     ██ ██ ██  ██▄▄▄▄██
+ ███▀▀███  ██  █▄██     ██     ██ ██ ██  ██▀▀▀▀▀▀
+ ███  ███  ██   ███  ▄▄▄██▄▄▄  ██ ██ ██  ▀██▄▄▄▄█
+ ▀▀▀  ▀▀▀  ▀▀   ▀▀▀  ▀▀▀▀▀▀▀▀  ▀▀ ▀▀ ▀▀    ▀▀▀▀▀
+           \e[0m \e[1;72m wHuT nImeK bRo | ANIME FIND BY SCREENSHOOT/IMG\e[0m
+     CODED BY NOKOMI 
+  \e[0m"
+
+}
+
+note() {
+
+printf "\n\e[101m\e[1;77m::  SEARCH ANIME BY IMG IN CLI TOOLS ::\e[0m\n"
+printf "\e[101m\e[1;77m::  This tool is made only when bored ::\e[0m\n"
+
+printf "\n"
+}
+
+menu() {
+
+printf "\n\e[1;92m[\e[0m\e[1;77m01\e[0m\e[1;92m]\e[0m\e[1;77m IMG BY URL\e[0m      \e[1;92m[\e[0m\e[1;77m02\e[0m\e[1;92m]\e[0m\e[1;77m IMG BY FOLDER \e[0m\n"
+
+read -p $'\n\e[1;92m[\e[0m\e[1;77m!\e[0m\e[1;92m] OPTION : \e[0m\en' option
+}
+
+search() {
+
+if [[ $option == 1 || $option == 01 ]]; then
+read -p $'\n\e[1;92m[\e[0m\e[1;77m!\e[0m\e[1;92m] IMG URL : \e[0m\en' gambar
+
+curl -s https://trace.moe/api/search?url=${gambar} -o "log"
+
+cat log | jq '.'
+
+printf "\n"
+
+elif [[ $option == 2 || $option == 02 ]]; then
+
+read -p $'\n\e[1;92m[\e[0m\e[1;77m!\e[0m\e[1;92m] IMG NAME/FOLDER : \e[0m\en' code
+
+curl -s -F "image=@/img/${img}" https://trace.moe/api/search -o "log"
+
+cat log | jq '.'
+
+rm log
+fi
+}
+tag
+note
+menu
+search
